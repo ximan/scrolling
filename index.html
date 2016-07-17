@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1, user-scalable=0, minimal-ui=yes" charset="UTF-8">
+    <title>scrolling - 移动端带滚动效果的返回顶部、返回指定位置</title>
+    <link rel="stylesheet" href="style/weui.min.css">
+<style>
+.back_up{
+    display: none;
+    position: fixed;
+    right: 10px;
+    bottom: 50px;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.back_up:before{
+    font-size: 40px;
+}
+.back_up.show{
+    display: block;
+}
+.weui_cell_warn{
+    -webkit-animation: light 0.3s linear 2;
+    animation: light 0.3s linear 2;
+}
+@keyframes light{
+    0%{
+        color: #000;
+    }
+    50%{
+        color: #e64340;
+    }
+    100%{
+        color: #000;
+    }
+}
+.popup_success{
+    display: none;
+}
+.popup_success.show{
+    display: block;
+}
+</style>
+</head>
+<body>
+<article class="weui_article">
+    <h1>移动端带滚动效果的返回顶部、返回指定位置demo</h1>
+</article>
+<div class="weui_cells_title">请填写注册信息：</div>
+<div class="weui_cells weui_cells_form">
+    <div class="weui_cell">
+        <div class="weui_cell_hd"><label class="weui_label">Email</label></div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" type="email" placeholder="请输入Email">
+        </div>
+    </div>
+    <div class="weui_cell">
+        <div class="weui_cell_hd"><label class="weui_label">密码</label></div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" type="password" placeholder="请输入密码">
+        </div>
+    </div>
+    <div class="weui_cell">
+        <div class="weui_cell_hd"><label class="weui_label">昵称</label></div>
+        <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" type="text" placeholder="请输入昵称">
+        </div>
+    </div>
+</div>
+<div class="weui_btn_area">
+    <a href="javascript:;" class="weui_btn weui_btn_primary btn_reg">注册</a>
+</div>
+<article class="weui_article">
+    <h1>本页面有2个示例效果</h1>
+    <section>
+        <section>
+            <h3>1 带滚动效果的返回顶部</h3>
+            <p>滑动页面到下方，超过100px会显示返回顶部箭头。</p>
+            <p>点击箭头，默认在500ms滚动到网页顶部。</p>
+        </section>
+        <section>
+            <h3>2 带滚动效果的返回指定位置</h3>
+            <p>表单什么都不填，点击注册按钮，页面会在300ms滚动到第一个为空的表单处。</p>
+            <p>我这里单独加了文字闪烁效果，所以会看到滚到指定位置后，文字会闪两下红色。</p>
+            <p>以此类推，直到所有表单都不为空，弹窗注册成功。</p>
+        </section>
+        <section>
+            <h3>3 测试标题</h3>
+            <p>第三次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+            <p>第三次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+            <p>第三次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+            <p>第三次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+            <p>第三次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+        </section>
+        <section>
+            <h3>4 测试标题</h3>
+            <p>第四次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+            <p>第四次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+            <p>第四次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+            <p>第四次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+            <p>第四次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+        </section>
+        <section>
+            <h3>5 测试标题</h3>
+            <p>第五次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+            <p>第五次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+            <p>第五次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+            <p>第五次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+            <p>第五次用weui，感觉组件太少了，满足不了我的需求呀！大家用得多吗？</p>
+        </section>
+    </section>
+</article>
+<div class="popup_success">
+    <div class="weui_mask_transparent"></div>
+    <div class="weui_toast">
+        <i class="weui_icon_toast"></i>
+        <p class="weui_toast_content">注册成功</p>
+    </div>
+</div>
+<i class="weui_icon_download back_up"></i>
+
+<script src="dist/scrolling.min.js"></script>
+<script>
+// 网页滑动超过100px显示返回顶部
+window.addEventListener('scroll',function(){
+    var _scrollTop = document.body.scrollTop;
+    var $backUp = document.querySelector('.back_up');
+    if(_scrollTop > 100){
+        $backUp.classList.add('show');
+    }else{
+        $backUp.classList.remove('show');
+    }
+},false);
+
+// 返回顶部
+document.querySelector('.back_up').addEventListener('click',function(){
+    // scrolling
+    scrolling();
+},false);
+
+// 点击提交按钮，如果文本框为空，高亮
+document.querySelector('.btn_reg').addEventListener('click',function(){
+    var $ipt = document.querySelectorAll('.weui_input');
+    var $pop = document.querySelector('.popup_success');
+    for(var i=0; i<$ipt.length; i++){
+        if($ipt[i].value == ''){
+            var $parents = $ipt[i].parentNode.parentNode;
+            // scrolling
+            scrolling({
+                dom: $parents,
+                speed: 300,
+                callback: function(){
+                    $parents.classList.add('weui_cell_warn');
+                    setTimeout(function(){
+                        $parents.classList.remove('weui_cell_warn');
+                    },600);
+                }
+            });
+            return;
+        }
+    }
+    // 弹窗
+    $pop.classList.add('show');
+    setTimeout(function(){
+        $pop.classList.remove('show');
+    },1000);
+},false);
+</script>
+</body>
+</html>
